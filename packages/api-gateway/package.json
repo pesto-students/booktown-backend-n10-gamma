@@ -1,0 +1,22 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --exec babel-node apiGateway.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@apollo/gateway": "0.14.0-alpha.2",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-flow": "^7.16.0",
+    "apollo-server": "^3.5.0",
+    "babel-node": "^0.0.1-security",
+    "graphql": "^15.3",
+    "nodemon": "^2.0.15"
+  }
+}
