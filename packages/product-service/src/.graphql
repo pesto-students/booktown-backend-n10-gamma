@@ -1,0 +1,37 @@
+type User {
+    id: String
+    firstName: String
+    lastName: String
+    email: String
+    password: String
+    phone: String
+    address: [Address]
+}
+
+type Address {
+    id: String
+    street: String
+    city: String
+    state: String
+    pin: Int
+    country: String
+}
+
+type Query {
+    hello: String
+    getProductById: String!
+    getProductByName: String!
+}
+type Mutation {
+    createUser(
+        firstName: String!
+        lastName: String
+        email: String!
+        password: String!
+        phone: String!
+    ): String
+
+    addProduct: String
+    updateProduct: String
+    deleteProduct: String
+}
