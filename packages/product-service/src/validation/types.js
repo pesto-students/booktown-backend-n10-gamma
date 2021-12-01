@@ -1,0 +1,1 @@
+export const PRODUCT_CREATE = 'PRODUCT_CREATE';
