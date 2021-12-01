@@ -1,0 +1,58 @@
+scalar JSON
+
+input AddressInput {
+    city: String
+    state: String
+    country: String
+    zipCode: Int
+    address: String
+}
+type AddressOutput {
+    city: String
+    state: String
+    country: String
+    zipCode: Int
+    address: String
+}
+
+type ProductOutput {
+    _id: String
+    name: String!
+    author: String!
+    price: Int!
+    originalPrice: Int!
+    files: [String]!
+    subcategory: String!
+    shippingAddress: AddressOutput
+    description: String!
+    category: String!
+    format: String!
+    condition: String!
+    status: String!
+}
+
+input ProductInput {
+    name: String!
+    author: String!
+    price: Int!
+    originalPrice: Int!
+    files: [String]!
+    subcategory: String!
+    shippingAddress: AddressInput
+    description: String!
+    category: String!
+    format: String!
+    condition: String!
+    status: String!
+}
+
+type Query {
+    getProductById(id: String): JSON
+    getProductByName(name: String): JSON
+}
+
+type Mutation {
+    addProduct(payload: ProductInput!): JSON
+    updateProduct(id: String!, payload: ProductInput!): JSON
+    deleteProduct(id: String!): JSON
+}
