@@ -1,7 +1,7 @@
 import { ApolloServer } from "apollo-server";
 import { ApolloGateway } from "@apollo/gateway";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 const product_listing_url =
   process.env.product_listing_url || "http://localhost:8001/graphql";
@@ -14,11 +14,6 @@ const gateway = new ApolloGateway({
 });
 
 const startGateway = async () => {
-  // const { schema, executor } = await gateway
-  //   .load()
-  //   .then((data) => console.log(data))
-  //   .catch((error) => console.log("I am " + error));
-
   const server = new ApolloServer({
     gateway,
   });
@@ -28,7 +23,7 @@ const startGateway = async () => {
     .then(({ url }) => {
       console.log(`🚀 Server ready at ${url}`);
     })
-    .catch((error) => console.log("asdfsf", error));
+    .catch((error) => console.log("", error));
 };
 
 startGateway();
