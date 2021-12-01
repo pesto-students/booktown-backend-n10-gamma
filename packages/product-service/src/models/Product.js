@@ -13,6 +13,10 @@ const ProductSchema = new Mongoose.Schema({
         type: Number,
         required: true,
     },
+    originalPrice: {
+        type: Number,
+    },
+
     description: {
         type: String,
         required: true,
@@ -30,22 +34,28 @@ const ProductSchema = new Mongoose.Schema({
         required: true,
     },
     shippingAddress: {
-        city: {
-            type: 'String',
+        type: {
+            city: {
+                type: 'String',
+            },
+            state: {
+                type: 'String',
+            },
+            country: {
+                type: 'String',
+            },
+            zipcode: {
+                type: 'Number',
+            },
+            address: {
+                type: 'String',
+                required: true,
+            },
         },
-        state: {
-            type: 'String',
-        },
-        country: {
-            type: 'String',
-        },
-        zipcode: {
-            type: 'Number',
-        },
-        address: {
-            type: 'String',
-            required: true,
-        },
+    },
+    status: {
+        type: String,
+        required: true,
     },
     format: {
         type: String,

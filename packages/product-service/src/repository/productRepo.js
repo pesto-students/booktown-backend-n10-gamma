@@ -17,13 +17,9 @@ export const getProducts = async () => {
     return await Product.find();
 };
 
-/**
- *
- * @param {Object} product
- * @returns
- */
-export const createProduct = async (product) => {
-    return await Product.create(product);
+export const saveProduct = async (product) => {
+    const newProduct = new Product(product);
+    return await newProduct.save();
 };
 
 /**
@@ -33,7 +29,7 @@ export const createProduct = async (product) => {
  * @returns
  */
 export const updateProduct = async (id, product) => {
-    return await Product.findByIdAndUpdate(id, product, { new: true });
+    return await Product.findByIdAndUpdate(id, product);
 };
 
 /**
