@@ -4,6 +4,9 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import fs from 'fs';
 import path from 'path';
 import resolveQuery from './src/controller';
+import GraphQLJSON from 'graphql-type-json';
+import { buildContext } from './src/utility/utilityFunctions';
+import firebaseAdmin from './src/config/firebaseAdmin';
 require('dotenv').config();
 
 const PORT = process.env.PORT;
@@ -28,13 +31,14 @@ const importGraphQLAndGetSchema = (file) => {
     `;
 };
 
-const resolvers = resolveQuery();
+const resolvers = { ...resolveQuery(), JSON: GraphQLJSON };
 
 async function createServer() {
     const app = express();
     const server = new ApolloServer({
         typeDefs: importGraphQLAndGetSchema('./src/.graphql'),
         resolvers,
+        context: buildContext,
     });
     await server.start();
     server.applyMiddleware({ app });
