@@ -1,12 +1,35 @@
 import express from "express";
 require("dotenv").config();
-import bodyParser from "body-parser";
+import { ApolloServer } from "apollo-server";
+import { buildFederatedSchema } from "@apollo/federation";
+import mongoose from "mongoose";
 import cors from "cors";
+import { resolvers } from "./resolvers";
+import { typeDefs } from "./typeDefs";
 
-const PORT = process.env.PORT;
-const server = express();
-server.use(cors());
+async function startServer() {
+  const app = express();
+  app.use(cors());
+  const PORT = process.env.PORT || 8001;
 
-server.listen(PORT, () => {
-  console.log(`server running on ${PORT} port`);
-});
+  const apolloServer = new ApolloServer({
+    schema: buildFederatedSchema([{ typeDefs, resolvers }]),
+  });
+
+  mongoose
+    .connect(
+      "mongodb+srv://admin:admin@cluster0.uxoos.mongodb.net/TheBooktown?retryWrites=true&w=majority",
+      { useNewUrlParser: true }
+    )
+    .then((res) => {
+      console.log("DB connection successful");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  await apolloServer.listen(PORT).then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`);
+  });
+}
+startServer();

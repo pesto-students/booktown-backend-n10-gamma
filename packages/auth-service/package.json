@@ -1,14 +1,12 @@
 {
-  "name": "user-service",
+  "name": "auth-service",
   "version": "1.0.0",
   "description": "",
-  "main": "userService.js",
+  "main": "cartService.js",
   "scripts": {
-    "start": "nodemon --exec babel-node userService.js",
+    "start": "nodemon --exec babel-node authService.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",
@@ -24,9 +22,13 @@
     "graphql": "^16.0.1",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.15",
+    "yep": "^0.1.0",
     "yup": "^0.32.11"
   },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "babel-plugin-polyfill-corejs3": "^0.4.0"
+    "babel-plugin-polyfill-corejs3": "^0.4.0",
+    "kill-port": "^1.6.1"
   }
 }
