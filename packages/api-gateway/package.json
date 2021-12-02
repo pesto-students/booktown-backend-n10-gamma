@@ -1,7 +1,7 @@
 {
   "name": "api-gateway",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "apiGateway.js",
   "license": "MIT",
   "scripts": {
     "start": "nodemon --exec babel-node apiGateway.js",
