@@ -10,6 +10,7 @@ const gateway = new ApolloGateway({
   serviceList: [
     // { name: "product-listing", url: product_listing_url },
     { name: "product-service", url: "http://localhost:8085/graphql" },
+    { name: "user-service", url: "http://localhost:8084/graphql" },
     // more services here
   ],
 });
