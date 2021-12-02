@@ -1,0 +1,17 @@
+scalar JSON
+
+type User{
+    id: String
+    firstName: String
+    lastName: String    
+    email: String!
+    password: String!
+}
+
+type Query {
+  
+}
+
+type Mutation {
+  createUser(payload: User): JSON
+}
