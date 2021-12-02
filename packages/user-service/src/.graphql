@@ -1,17 +1,13 @@
 scalar JSON
 
-type User{
-    id: String
+input User {
+    uid: String!
     firstName: String
-    lastName: String    
+    lastName: String
     email: String!
     password: String!
 }
 
-type Query {
-  
-}
-
 type Mutation {
-  createUser(payload: User): JSON
+    createUser(payload: User): JSON
 }

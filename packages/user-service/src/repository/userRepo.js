@@ -9,6 +9,10 @@ export const getUsers = async () => {
     const users = await User.find();
     return users;
 };
+export const getUserByEmail = async (email) => {
+    const user = await User.findOne({ email });
+    return user;
+};
 
 export const createUser = async (user) => {
     const newUser = new User(user);
