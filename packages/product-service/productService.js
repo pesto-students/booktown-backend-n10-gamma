@@ -7,6 +7,7 @@ import resolveQuery from './src/controller';
 import GraphQLJSON from 'graphql-type-json';
 import { buildContext } from './src/utility/utilityFunctions';
 import firebaseAdmin from './src/config/firebaseAdmin';
+import { buildFederatedSchema } from '@apollo/federation';
 require('dotenv').config();
 
 const PORT = process.env.PORT;
@@ -36,8 +37,12 @@ const resolvers = { ...resolveQuery(), JSON: GraphQLJSON };
 async function createServer() {
     const app = express();
     const server = new ApolloServer({
-        typeDefs: importGraphQLAndGetSchema('./src/.graphql'),
-        resolvers,
+        schema: buildFederatedSchema([
+            {
+                typeDefs: importGraphQLAndGetSchema('./src/.graphql'),
+                resolvers,
+            },
+        ]),
         context: buildContext,
     });
     await server.start();
