@@ -2,14 +2,14 @@ import { Books } from "./models/BookFilters";
 
 export const resolvers = {
   Query: {
-    hello: () => "hi",
     books: async () => {
       console.log(Books.find());
       return await Books.find();
     },
     filterLanguage: async (_, { language }) =>
       await Books.find().where({ language: language }),
-    filterType: async (_, { type }) => await Books.find().where({ type: type }),
+    filterType: async (_, { type }) =>
+      await Books.find().where({ format: type }),
     filterPrice: async (_, { min, max }) =>
       await Books.find({ price: { $gte: min, $lte: max } }),
   },
