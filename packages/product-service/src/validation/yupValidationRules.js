@@ -1,7 +1,9 @@
 import * as yup from 'yup';
 
 export const productCreate = yup.object().shape({
-    name: yup.string().required('name is required'),
+    title: yup.string().required('name is required'),
+    subTitle: yup.string().required('subTitle is required'),
+    publisher: yup.string().required('publisher is required'),
     author: yup.string().required('author is required'),
     description: yup.string().required('description is required'),
     price: yup.number().required('price is required'),
