@@ -2,7 +2,6 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   type Query {
-    hello: String!
     filterLanguage(language: String!): [Book!]!
     filterType(type: String!): [Book!]!
     books: [Book!]!
@@ -10,18 +9,23 @@ export const typeDefs = gql`
   }
 
   type Book {
-    id: Float!
-    title: String!
-    subTitle: String!
-    author: String!
-    published: String!
-    publisher: String!
-    pages: Float!
-    description: String!
-    url: String!
-    type: String!
-    language: String!
-    price: Float!
+    id: ID!
+    title: String
+    subTitle: String
+    author: String
+    published: String
+    publisher: String
+    pages: Int
+    description: String
+    files: [String]
+    condition: String
+    language: String
+    price: Int
+    originalPrice: Int
+    status: String
+    format: String
+    subcategory: String
+    category: String
   }
 
   type Mutation {

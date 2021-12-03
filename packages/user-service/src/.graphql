@@ -1,0 +1,13 @@
+scalar JSON
+
+input User {
+    uid: String!
+    firstName: String
+    lastName: String
+    email: String!
+    password: String!
+}
+
+type Mutation {
+    createUser(payload: User): JSON
+}

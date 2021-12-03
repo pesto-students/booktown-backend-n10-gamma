@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 export const Books = mongoose.model("Books", {
-  id: Number,
   title: String,
   subTitle: String,
   author: String,
@@ -9,8 +8,13 @@ export const Books = mongoose.model("Books", {
   publisher: String,
   pages: Number,
   description: String,
-  url: String,
-  type: String,
+  files: [String],
+  condition: String,
   language: String,
   price: Number,
+  originalPrice: Number,
+  status: String,
+  format: String,
+  subcategory: String,
+  category: String,
 });

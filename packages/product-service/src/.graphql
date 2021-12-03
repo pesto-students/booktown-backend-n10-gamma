@@ -17,7 +17,9 @@ type AddressOutput {
 
 type ProductOutput {
     _id: String
-    name: String!
+    title: String!
+    subTitle: String
+    publisher: String
     author: String!
     price: Int!
     originalPrice: Int!
@@ -32,10 +34,12 @@ type ProductOutput {
 }
 
 input ProductInput {
-    name: String!
+    title: String!
+    subTitle: String
+    publisher: String
     author: String!
     price: Int!
-    originalPrice: Int!
+    originalPrice: Int
     files: [String]!
     subcategory: String!
     shippingAddress: AddressInput
@@ -44,6 +48,7 @@ input ProductInput {
     format: String!
     condition: String!
     status: String!
+    language: String!
 }
 
 type Query {
