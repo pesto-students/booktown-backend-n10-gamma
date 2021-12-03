@@ -1,7 +1,13 @@
 import Mongoose from 'mongoose';
 
 const ProductSchema = new Mongoose.Schema({
-    name: {
+    publisher: String,
+    title: {
+        type: String,
+        required: true,
+    },
+
+    subTitle: {
         type: String,
         required: true,
     },
@@ -32,6 +38,13 @@ const ProductSchema = new Mongoose.Schema({
     subcategory: {
         type: String,
         required: true,
+    },
+    language: {
+        type: String,
+        required: true,
+    },
+    pages: {
+        type: Number,
     },
     shippingAddress: {
         type: {
@@ -73,6 +86,10 @@ const ProductSchema = new Mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    published: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
-export default Mongoose.model('Products', ProductSchema);
+export default Mongoose.model('Products', ProductSchema, 'books');

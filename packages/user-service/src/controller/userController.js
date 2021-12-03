@@ -31,6 +31,16 @@ export default class UserController {
         }
 
         try {
+            const isUserPresent = await userRepo.getUserByEmail(
+                args.payload.email
+            );
+            if (isUserPresent) {
+                return {
+                    status: HTTP_STATUS_CODE.BAD_REQUEST.code,
+                    message: 'User already exists',
+                    data: {},
+                };
+            }
             const user = await userRepo.createUser(args.payload);
             return {
                 status: HTTP_STATUS_CODE.CREATED.code,
