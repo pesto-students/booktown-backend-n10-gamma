@@ -1,5 +1,13 @@
 import { ApolloServer } from "apollo-server";
-import { ApolloGateway } from "@apollo/gateway";
+import { ApolloGateway, RemoteGraphQLDataSource } from "@apollo/gateway";
+
+class AuthenticatedDataSource extends RemoteGraphQLDataSource {
+  willSendRequest({ request, context }) {
+    // Pass the user's id from the context to each subgraph
+    // as a header called `user-id`
+    request.http.headers.set("authorization", context.token);
+  }
+}
 
 const PORT = process.env.PORT || 8000;
 
@@ -13,11 +21,17 @@ const gateway = new ApolloGateway({
     { name: "user-service", url: "http://localhost:8084/graphql" },
     // more services here
   ],
+  buildService({ name, url }) {
+    return new AuthenticatedDataSource({ url });
+  },
 });
 
 const startGateway = async () => {
   const server = new ApolloServer({
     gateway,
+    context: ({ req }) => {
+      return { token: req.headers.authorization };
+    },
   });
 
   server
