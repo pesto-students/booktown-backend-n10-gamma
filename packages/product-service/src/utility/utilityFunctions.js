@@ -19,13 +19,15 @@ export const buildContext = async ({ req }) => {
     };
     if (token) {
         try {
-            const user = await Admin.auth().verifyIdToken(token);
-            context.user = user;
+            if (token.startsWith('Bearer ')) {
+                const barearToken = token.substring(7);
+                const user = await Admin.auth().verifyIdToken(barearToken);
+                context.user = user;
+            }
         } catch (err) {
             console.log('error', err);
             context.user = null;
         }
     }
-
     return context;
 };

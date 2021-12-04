@@ -13,7 +13,7 @@ export default class ProductCrudController {
             Query: {
                 getProductById: {
                     resolver: this.getProductById,
-                    authorizer: isPublic,
+                    authorizer: isSignIn,
                 },
                 getProductByName: {
                     resolver: this.getProductByName,
@@ -23,7 +23,7 @@ export default class ProductCrudController {
             Mutation: {
                 addProduct: {
                     resolver: this.addProduct,
-                    authorizer: isPublic,
+                    authorizer: isSignIn,
                 },
                 updateProduct: {
                     resolver: this.updateProduct,
@@ -31,7 +31,7 @@ export default class ProductCrudController {
                 },
                 deleteProduct: {
                     resolver: this.deleteProduct,
-                    authorizer: isPublic,
+                    authorizer: isSignIn,
                 },
             },
         };
