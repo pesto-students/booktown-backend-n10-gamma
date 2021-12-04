@@ -16,21 +16,21 @@ type AddressOutput {
 }
 
 type ProductOutput {
-    _id: String
-    title: String!
+    id: ID
+    title: String
     subTitle: String
     publisher: String
     author: String!
-    price: Int!
-    originalPrice: Int!
-    files: [String]!
-    subcategory: String!
+    price: Int
+    originalPrice: Int
+    files: [String]
+    subcategory: String
     shippingAddress: AddressOutput
-    description: String!
-    category: String!
-    format: String!
-    condition: String!
-    status: String!
+    description: String
+    category: String
+    format: String
+    condition: String
+    status: String
 }
 
 input ProductInput {
@@ -51,8 +51,14 @@ input ProductInput {
     language: String!
 }
 
+type ProductResponse {
+    status: Int
+    message: String
+    data: ProductOutput
+}
+
 type Query {
-    getProductById(id: String): JSON
+    getProductById(id: String): ProductResponse
     getProductByName(name: String): JSON
 }
 

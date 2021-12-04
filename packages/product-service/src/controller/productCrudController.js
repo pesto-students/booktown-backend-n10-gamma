@@ -38,6 +38,7 @@ export default class ProductCrudController {
     }
 
     async getProductById(root, args, context) {
+        console.log(args.id);
         try {
             const product = await ProductRepo.getProductById(args.id);
             if (!product) {
@@ -47,7 +48,11 @@ export default class ProductCrudController {
                     data: {},
                 };
             }
-            return product;
+            return {
+                status: HTTP_STATUS_CODE.OK.code,
+                message: HTTP_STATUS_CODE.OK.message,
+                data: product,
+            };
         } catch (err) {
             return {
                 status: HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR.code,
