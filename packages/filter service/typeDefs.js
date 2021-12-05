@@ -6,10 +6,21 @@ export const typeDefs = gql`
     filterType(type: String!): [Book!]!
     books: [Book!]!
     filterPrice(min: Float!, max: Float!): [Book!]!
+    filterBooks(payload: FilterOptions!): [Book]
   }
 
+  input FilterOptions {
+    language: String
+    price: PriceFilter
+    format: String
+    condition: String
+  }
+  input PriceFilter {
+    min: Int
+    max: Int
+  }
   type Book {
-    id: ID!
+    id: ID
     title: String
     subTitle: String
     author: String
@@ -43,5 +54,6 @@ export const typeDefs = gql`
       language: String!
       price: Float!
     ): Book!
+    filterBooks: [Book!]!
   }
 `;

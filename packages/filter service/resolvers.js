@@ -6,6 +6,22 @@ export const resolvers = {
       console.log(Books.find());
       return await Books.find();
     },
+    filterBooks: async (root, args) => {
+      const reqPayload = args.payload;
+      const query = [];
+      Object.keys(reqPayload).forEach((key) => {
+        if (reqPayload[key]) {
+          if (key === "price" && Object.keys(reqPayload[key]).length > 0) {
+            query.push({
+              [key]: { $gte: reqPayload[key].min, $lte: reqPayload[key].max },
+            });
+          } else {
+            query.push({ [key]: reqPayload[key] });
+          }
+        }
+      });
+      return await Books.find({ $and: query });
+    },
     filterLanguage: async (_, { language }) =>
       await Books.find().where({ language: language }),
     filterType: async (_, { type }) =>
