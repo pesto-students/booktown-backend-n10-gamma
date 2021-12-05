@@ -15,7 +15,11 @@ export const getUserByEmail = async (email) => {
 };
 
 export const createUser = async (user) => {
-    const newUser = new User(user);
+    const updateSchema = {
+        ...user,
+        _id: user.id,
+    };
+    const newUser = new User(updateSchema);
     const savedUser = await newUser.save();
     return savedUser;
 };

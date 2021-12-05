@@ -1,7 +1,7 @@
 scalar JSON
 
 input User {
-    uid: String!
+    id: String
     firstName: String
     lastName: String
     email: String!

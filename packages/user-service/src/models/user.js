@@ -2,7 +2,7 @@ import Mongoose from 'mongoose';
 
 const UserSchema = new Mongoose.Schema(
     {
-        id: {
+        _id: {
             type: String,
             required: true,
         },
@@ -24,6 +24,14 @@ const UserSchema = new Mongoose.Schema(
         },
         phone: {
             type: String,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
+        updatedAt: {
+            type: Date,
+            default: Date.now,
         },
     },
     { _id: false }
