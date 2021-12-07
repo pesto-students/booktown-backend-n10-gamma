@@ -49,6 +49,7 @@ input ProductInput {
     condition: String!
     status: String!
     language: String!
+    quantity: Int
 }
 
 type ProductResponse {
@@ -57,13 +58,48 @@ type ProductResponse {
     data: ProductOutput
 }
 
+input OrderHistoryInput {
+    uid: String
+    orderAmount: Int
+    shippingAddress: AddressInput
+    orderId: String
+    orderStatus: String
+    orderDate: String
+    orderTotal: Int
+    orderDiscount: Int
+    orderPaymentStatus: String
+    orderPaymentMethod: String
+    orderItems: [ProductInput]
+}
+type OrderHistoryOutput {
+    id: ID
+    uid: String
+    orderAmount: Int
+    shippingAddress: AddressOutput
+    orderId: String
+    orderStatus: String
+    orderDate: String
+    orderTotal: Int
+    orderDiscount: Int
+    orderPaymentStatus: String
+    orderPaymentMethod: String
+    orderItems: [ProductOutput]
+}
+type OrderHistoryResponse {
+    status: Int
+    message: String
+    data: OrderHistoryOutput
+}
+
 type Query {
     getProductById(id: String): ProductResponse
     getProductByName(name: String): JSON
+    getUserHistory(uid: String): OrderHistoryResponse
 }
 
 type Mutation {
     addProduct(payload: ProductInput!): JSON
     updateProduct(id: String!, payload: ProductInput!): JSON
     deleteProduct(id: String!): JSON
+    addOrderHistory(payload: OrderHistoryInput!): OrderHistoryResponse
 }
