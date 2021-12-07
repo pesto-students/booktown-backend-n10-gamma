@@ -10,7 +10,12 @@ export default class UserController {
     constructor() {}
     resolvers() {
         return {
-            Query: {},
+            Query: {
+                getUserById: {
+                    resolver: this.getUserById,
+                    authorizer: isPublic,
+                },
+            },
             Mutation: {
                 createUser: {
                     resolver: this.createUser,
@@ -45,6 +50,30 @@ export default class UserController {
             return {
                 status: HTTP_STATUS_CODE.CREATED.code,
                 message: HTTP_STATUS_CODE.CREATED.message,
+                data: user,
+            };
+        } catch (err) {
+            return {
+                status: HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR.code,
+                message: HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR.message,
+                data: { message: err.message },
+            };
+        }
+    }
+
+    async getUserById(root, args, context) {
+        try {
+            const user = await userRepo.getUserById(args.id);
+            if (!user) {
+                return {
+                    status: HTTP_STATUS_CODE.NOT_FOUND.code,
+                    message: HTTP_STATUS_CODE.NOT_FOUND.message,
+                    data: {},
+                };
+            }
+            return {
+                status: HTTP_STATUS_CODE.OK.code,
+                message: HTTP_STATUS_CODE.OK.message,
                 data: user,
             };
         } catch (err) {
