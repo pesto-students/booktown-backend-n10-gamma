@@ -23,12 +23,30 @@ export default class UserOrderController {
     }
 
     async getUserHistory(root, args, context) {
-        // const { uid } = context?.user || {};
-        // if (!uid) throw new Error('User not found');
-        // const { page, limit } = args;
-        // const userHistory = await userRepo.getUserHistory(userId, page, limit);
-        // return userHistory;
-        return {};
+        const { uid } = context?.user || {};
+        if (!uid) throw new Error('User not found');
+        try {
+            const orderHistory = await OrderRepo.getUserHistory(uid);
+            if (!orderHistory) {
+                return {
+                    status: HTTP_STATUS_CODE.NOT_FOUND.code,
+                    message: 'No order history found',
+                    data: {},
+                };
+            }
+
+            return {
+                status: HTTP_STATUS_CODE.OK.code,
+                message: 'User order history found',
+                data: orderHistory,
+            };
+        } catch (err) {
+            return {
+                status: HTTP_STATUS_CODE.BAD_REQUEST.code,
+                message: err.message,
+                data: {},
+            };
+        }
     }
 
     async addOrderHistory(root, args, context) {

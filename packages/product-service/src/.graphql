@@ -97,7 +97,7 @@ type OrderHistoryResponse {
 type Query {
     getProductById(id: String): ProductResponse
     getProductByName(name: String): JSON
-    getUserHistory(uid: String): OrderHistoryResponse
+    getUserHistory: JSON
 }
 
 type Mutation {

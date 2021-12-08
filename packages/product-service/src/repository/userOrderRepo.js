@@ -1,6 +1,6 @@
 import orderHistory from '../models/orderHistory';
 
-export const getOrderHistory = async (uid) => {
+export const getUserHistory = async (uid) => {
     const orderHistoryData = await orderHistory.find({ uid });
     return orderHistoryData;
 };
