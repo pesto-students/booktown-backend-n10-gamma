@@ -34,22 +34,25 @@ type ProductOutput {
 }
 
 input ProductInput {
-    title: String!
+    id: ID
+    title: String
     subTitle: String
     publisher: String
-    author: String!
-    price: Int!
+    author: String
+    price: Int
     originalPrice: Int
-    files: [String]!
-    subcategory: String!
+    files: [String]
+    subcategory: String
     shippingAddress: AddressInput
-    description: String!
-    category: String!
-    format: String!
-    condition: String!
-    status: String!
-    language: String!
+    description: String
+    category: String
+    format: String
+    condition: String
+    status: String
+    language: String
     quantity: Int
+    published: String
+    pages: Int
 }
 
 type ProductResponse {
