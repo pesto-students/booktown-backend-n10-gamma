@@ -1,4 +1,4 @@
-import { HTTP_STATUS_CODE, isPublic, isSignIn } from '../config/appConst';
+import { HTTP_STATUS_CODE, isSignIn } from '../config/appConst';
 import * as OrderRepo from '../repository/userOrderRepo';
 /**
  *
@@ -16,7 +16,7 @@ export default class UserOrderController {
             Mutation: {
                 addOrderHistory: {
                     resolver: this.addOrderHistory,
-                    authorizer: isPublic,
+                    authorizer: isSignIn,
                 },
             },
         };
