@@ -1,0 +1,26 @@
+scalar JSON
+
+input User {
+    id: String
+    firstName: String
+    lastName: String
+    email: String!
+    password: String!
+}
+
+type UserOutput {
+    _id: String
+    firstName: String
+    lastName: String
+    email: String
+    phone: String
+    createdAt: String
+    updatedAt: String
+}
+
+type Query {
+    getUserById(id: String!): JSON
+}
+type Mutation {
+    createUser(payload: User): JSON
+}
