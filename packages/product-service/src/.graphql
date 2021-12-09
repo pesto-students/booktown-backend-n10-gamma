@@ -34,21 +34,25 @@ type ProductOutput {
 }
 
 input ProductInput {
-    title: String!
+    id: ID
+    title: String
     subTitle: String
     publisher: String
-    author: String!
-    price: Int!
+    author: String
+    price: Int
     originalPrice: Int
-    files: [String]!
-    subcategory: String!
+    files: [String]
+    subcategory: String
     shippingAddress: AddressInput
-    description: String!
-    category: String!
-    format: String!
-    condition: String!
-    status: String!
-    language: String!
+    description: String
+    category: String
+    format: String
+    condition: String
+    status: String
+    language: String
+    quantity: Int
+    published: String
+    pages: Int
 }
 
 type ProductResponse {
@@ -57,13 +61,48 @@ type ProductResponse {
     data: ProductOutput
 }
 
+input OrderHistoryInput {
+    uid: String
+    orderAmount: Int
+    shippingAddress: AddressInput
+    orderId: String
+    orderStatus: String
+    orderDate: String
+    orderTotal: Int
+    orderDiscount: Int
+    orderPaymentStatus: String
+    orderPaymentMethod: String
+    orderItems: [ProductInput]
+}
+type OrderHistoryOutput {
+    id: ID
+    uid: String
+    orderAmount: Int
+    shippingAddress: AddressOutput
+    orderId: String
+    orderStatus: String
+    orderDate: String
+    orderTotal: Int
+    orderDiscount: Int
+    orderPaymentStatus: String
+    orderPaymentMethod: String
+    orderItems: [ProductOutput]
+}
+type OrderHistoryResponse {
+    status: Int
+    message: String
+    data: OrderHistoryOutput
+}
+
 type Query {
     getProductById(id: String): ProductResponse
     getProductByName(name: String): JSON
+    getUserHistory: JSON
 }
 
 type Mutation {
     addProduct(payload: ProductInput!): JSON
     updateProduct(id: String!, payload: ProductInput!): JSON
     deleteProduct(id: String!): JSON
+    addOrderHistory(payload: OrderHistoryInput!): OrderHistoryResponse
 }

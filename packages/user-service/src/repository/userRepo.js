@@ -1,6 +1,6 @@
 import User from '../models/user';
 
-export const getUser = async (id) => {
+export const getUserById = async (id) => {
     const user = await User.findById(id);
     return user;
 };

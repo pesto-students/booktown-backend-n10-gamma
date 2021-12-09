@@ -1,8 +1,10 @@
 import productCrudController from './productCrudController';
+import UserOrderController from './userOrderController';
 import { authMiddleware, getClassInstance } from '../utility/utilityFunctions';
 import { PRIVATE, PUBLIC } from '../config/appConst';
 export const controllers = {
     productCrudController,
+    UserOrderController,
     //add more controllers here
 };
 
