@@ -1,6 +1,8 @@
+import FilterController from './filterController';
 import { authMiddleware, getClassInstance } from '../utility/utilityFunctions';
 import { PRIVATE, PUBLIC } from '../config/appConst';
 export const controllers = {
+    FilterController,
     //add more controllers here
 };
 
