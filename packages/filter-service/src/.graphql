@@ -1,1 +1,42 @@
 scalar JSON
+
+input FilterOptions {
+    language: String
+    price: PriceFilter
+    format: String
+    condition: String
+}
+input PriceFilter {
+    min: Int
+    max: Int
+}
+type Book {
+    id: ID
+    title: String
+    subTitle: String
+    author: String
+    published: String
+    publisher: String
+    pages: Int
+    description: String
+    files: [String]
+    condition: String
+    language: String
+    price: Int
+    originalPrice: Int
+    status: String
+    format: String
+    subcategory: String
+    category: String
+}
+
+type Mutation {
+    filterBooks: [Book!]!
+}
+type Query {
+    filterLanguage(language: String!): [Book!]!
+    filterType(type: String!): [Book!]!
+    books: [Book!]!
+    filterPrice(min: Float!, max: Float!): [Book!]!
+    filterBooks(payload: FilterOptions!): [Book]
+}
