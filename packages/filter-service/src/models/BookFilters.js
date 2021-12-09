@@ -18,5 +18,4 @@ const Books = mongoose.model('Books', {
     subcategory: String,
     category: String,
 });
-
 export default Books;
