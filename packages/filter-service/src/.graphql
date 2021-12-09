@@ -34,9 +34,10 @@ type Mutation {
     filterBooks: [Book!]!
 }
 type Query {
+    getBooksCount: Int!
     filterLanguage(language: String!): [Book!]!
     filterType(type: String!): [Book!]!
-    books: [Book!]!
+    books(page: Int, limit: Int): [Book!]!
     filterPrice(min: Float!, max: Float!): [Book!]!
     filterBooks(payload: FilterOptions!): [Book]
 }

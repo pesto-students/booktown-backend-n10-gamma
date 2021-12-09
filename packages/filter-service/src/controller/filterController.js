@@ -16,13 +16,18 @@ export default class FilterController {
                     resolver: this.getFilterBooks,
                     authorizer: isSignIn,
                 },
+                getBooksCount: {
+                    resolver: this.getBooksCount,
+                    authorizer: isSignIn,
+                },
             },
         };
     }
 
     async getBoooks(root, args, context) {
+        const { page, limit } = args;
         try {
-            return await FilterRepo.getBooks();
+            return await FilterRepo.getBooks(page, limit);
         } catch (e) {
             throw new Error(e);
         }
@@ -49,5 +54,12 @@ export default class FilterController {
             }
         });
         return FilterRepo.filterBooks(query);
+    }
+    async getBooksCount(root, args, context) {
+        try {
+            return await FilterRepo.getBooksCount();
+        } catch (e) {
+            throw new Error(e);
+        }
     }
 }
