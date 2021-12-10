@@ -25,6 +25,8 @@
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.15",
     "yep": "^0.1.0",
+    "prom-client": "^14.0.1",
+    "prometheus-api-metrics": "^3.2.0",
     "yup": "^0.32.11"
   },
   "author": "",
