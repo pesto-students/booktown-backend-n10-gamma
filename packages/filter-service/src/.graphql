@@ -34,6 +34,7 @@ type Mutation {
     filterBooks: [Book!]!
 }
 type Query {
+    searchBooks(query: String): [Book]
     getBooksCount: Int!
     filterLanguage(language: String!): [Book!]!
     filterType(type: String!): [Book!]!
