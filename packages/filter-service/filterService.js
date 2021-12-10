@@ -8,9 +8,14 @@ import GraphQLJSON from 'graphql-type-json';
 import { buildContext } from './src/utility/utilityFunctions';
 import firebaseAdmin from './src/config/firebaseAdmin';
 import { buildSubgraphSchema } from '@apollo/federation';
+import { routesHandler } from './src/routes';
 require('dotenv').config();
+import apiMetrics from 'prometheus-api-metrics';
 
 const PORT = process.env.PORT;
+const app = express();
+routesHandler(app);
+app.use(apiMetrics());
 
 mongoose
     .connect(process.env.DB_CONNECTION_URL || '', {
@@ -35,7 +40,6 @@ const importGraphQLAndGetSchema = (file) => {
 const resolvers = { ...resolveQuery(), JSON: GraphQLJSON };
 
 async function createServer() {
-    const app = express();
     const server = new ApolloServer({
         schema: buildSubgraphSchema([
             {

@@ -1,24 +1,29 @@
 import { ApolloServer } from "apollo-server";
 import { ApolloGateway, RemoteGraphQLDataSource } from "@apollo/gateway";
+import apiMetrics from "prometheus-api-metrics";
+import express from "express";
 
+const app = express();
+app.use(apiMetrics());
 class AuthenticatedDataSource extends RemoteGraphQLDataSource {
   willSendRequest({ request, context }) {
-    // Pass the user's id from the context to each subgraph
-    // as a header called `user-id`
     request.http.headers.set("authorization", context.token);
   }
 }
 
 const PORT = process.env.PORT || 8000;
-
-const product_listing_url =
-  process.env.product_listing_url || "http://localhost:8082/graphql";
+const product_service = "http://localhost:8085/graphql";
+const user_service = "https://booktown-user-service.herokuapp.com/graphql";
+const filter_service = "http://localhost:8082/graphql";
 
 const gateway = new ApolloGateway({
   serviceList: [
-    { name: "product-listing", url: product_listing_url },
-    { name: "product-service", url: "http://localhost:8085/graphql" },
-    { name: "user-service", url: "http://localhost:8084/graphql" },
+    { name: "product-listing", url: filter_service },
+    {
+      name: "product-service",
+      url: product_service,
+    },
+    { name: "user-service", url: user_service },
     // more services here
   ],
   buildService({ name, url }) {

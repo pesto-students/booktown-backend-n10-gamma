@@ -17,3 +17,7 @@ export const filterBooks = async (query) => {
 export const getBooksCount = async () => {
     return await Book.countDocuments();
 };
+
+export const searchBooks = async (query) => {
+    return await Book.find({ $text: { $search: query } });
+};

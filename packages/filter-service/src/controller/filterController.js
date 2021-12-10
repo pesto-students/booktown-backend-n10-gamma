@@ -20,6 +20,10 @@ export default class FilterController {
                     resolver: this.getBooksCount,
                     authorizer: isSignIn,
                 },
+                searchBooks: {
+                    resolver: this.searchBooks,
+                    authorizer: isPublic,
+                },
             },
         };
     }
@@ -33,9 +37,10 @@ export default class FilterController {
         }
     }
 
-    async filterBooks(root, args, context) {
+    async getFilterBooks(root, args, context) {
         const reqPayload = args.payload;
         const query = [];
+
         Object.keys(reqPayload).forEach((key) => {
             if (reqPayload[key]) {
                 if (
@@ -53,11 +58,21 @@ export default class FilterController {
                 }
             }
         });
+
         return FilterRepo.filterBooks(query);
     }
     async getBooksCount(root, args, context) {
         try {
             return await FilterRepo.getBooksCount();
+        } catch (e) {
+            throw new Error(e);
+        }
+    }
+
+    async searchBooks(root, args, context) {
+        const { query } = args;
+        try {
+            return await FilterRepo.searchBooks(query);
         } catch (e) {
             throw new Error(e);
         }

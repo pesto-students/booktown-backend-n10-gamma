@@ -38,7 +38,6 @@ export default class ProductCrudController {
     }
 
     async getProductById(root, args, context) {
-        console.log(args.id);
         try {
             const product = await ProductRepo.getProductById(args.id);
             if (!product) {
