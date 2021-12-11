@@ -9,7 +9,7 @@ Namely :
 1. Product-service
 2. Filter-service
 3. user-service
-4. gateway : All the service are combines and run through gateway
+4. gateway : All the service are combined and run through gateway
 
 ## Installation
 
