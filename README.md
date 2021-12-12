@@ -12,9 +12,10 @@ Namely :
 4. gateway : All the service are combined and run through gateway
 
 ## Installation
+Install lerna package globally using **yarn install global lerna**
 
-1. run yarn bootstrap to install all the necessary packages. We have used lerna to place all the service together in a package . 
-2. you can run the individual serives by goind inside each service present in the package folder by using "yarn start"
+1. run **yarn bootstrap** to install all the necessary packages. We have used lerna to place all the service together in a package . 
+2. you can run the individual serives by goind inside each service present in the package folder by using **yarn start**
 3. Once the all the service are up you can run the gateway . All the running services should be placed inside gateway -> services array. 
 4. Note gateway will crash if the mentioned service in the service array is note up.
 
