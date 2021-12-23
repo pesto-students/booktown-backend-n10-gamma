@@ -1,10 +1,10 @@
 scalar JSON
 
 input FilterOptions {
-    language: String
-    price: PriceFilter
-    format: String
-    condition: String
+    language: [String]
+    price: [PriceFilter]
+    format: [String]
+    condition: [String]
 }
 input PriceFilter {
     min: Int

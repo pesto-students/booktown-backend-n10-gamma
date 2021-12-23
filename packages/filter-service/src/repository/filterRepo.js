@@ -11,7 +11,9 @@ export const getBook = async (id) => {
 };
 
 export const filterBooks = async (query) => {
-    return await Book.find({ $and: query });
+    return Book.find({
+        $and: query,
+    });
 };
 
 export const getBooksCount = async () => {

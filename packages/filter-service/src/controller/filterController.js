@@ -40,25 +40,12 @@ export default class FilterController {
     async getFilterBooks(root, args, context) {
         const reqPayload = args.payload;
         const query = [];
-
+        //get only the keys that are not empty
         Object.keys(reqPayload).forEach((key) => {
-            if (reqPayload[key]) {
-                if (
-                    key === 'price' &&
-                    Object.keys(reqPayload[key]).length > 0
-                ) {
-                    query.push({
-                        [key]: {
-                            $gte: reqPayload[key].min,
-                            $lte: reqPayload[key].max,
-                        },
-                    });
-                } else {
-                    query.push({ [key]: reqPayload[key] });
-                }
+            if (reqPayload[key].length > 0) {
+                query.push({ [key]: { $in: reqPayload[key] } });
             }
         });
-
         return FilterRepo.filterBooks(query);
     }
     async getBooksCount(root, args, context) {
